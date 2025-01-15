@@ -123,5 +123,5 @@ led_off:
 <br>
 
 ## License
-[Apache License 2.0](https://github.com/mytechnotalent/ATmega128P_IO_Driver/blob/main/LICENSE)
+[Apache License 2.0](https://github.com/mytechnotalent/ATmega328P_IO_Driver/blob/main/LICENSE)
 
