@@ -40,13 +40,13 @@
 ;               6.90 RJMP – Relative Jump
 ; ===================================================================
 program:
-  rcall  config_pins              ; config pins
+  RCALL  Config_Pins              ; config pins
 program_loop:
-  rcall  check_button             ; check button state; control LED
-  rjmp   program_loop             ; infinite loop
+  RCALL  Check_Button             ; check button state; control LED
+  RJMP   program_loop             ; infinite loop
 
 ; ===================================================================
-; SUBROUTINE: config_pins
+; SUBROUTINE: Config_Pins
 ; ===================================================================
 ; Description: Main configuration of pins on the ATmega128P Arduino 
 ;              Nano.
@@ -56,14 +56,14 @@ program_loop:
 ;               6.95 SBI – Set Bit in I/O Register
 ;               6.88 RET – Return from Subroutine
 ; ===================================================================
-config_pins:
-  cbi    DDRD, PD2                ; set PD2 as input (button pin)
-  sbi    PORTD, PD2               ; enable pull-up resistor on PD2
-  sbi    DDRD, PD4                ; set PD4 as output (LED pin)
-  ret                             ; return from subroutine
+Config_Pins:
+  CBI    DDRD, PD2                ; set PD2 as input (button pin)
+  SBI    PORTD, PD2               ; enable pull-up resistor on PD2
+  SBI    DDRD, PD4                ; set PD4 as output (LED pin)
+  RET                             ; return from subroutine
 
 ; ===================================================================
-; SUBROUTINE: check_button
+; SUBROUTINE: Check_Button
 ; ===================================================================
 ; Description: Checks if PD2 is pressed and if so, drive LED high,
 ;              otherwise drive LED low.
@@ -73,15 +73,15 @@ config_pins:
 ;               6.96 SBIC – Skip if Bit in I/O Register is Cleared
 ;               6.88 RET – Return from Subroutine
 ; ===================================================================
-check_button:
-  sbis   PIND, PD2                ; skip next inst if PD2 is high
-  rcall  led_on                   ; if PD2 is low; BTN pressed
-  sbic   PIND, PD2                ; skip next inst if PD2 is low
-  rcall  led_off                  ; if PD2 is high; BTN not pressed
-  ret                             ; return from subroutine
+Check_Button:
+  SBIS   PIND, PD2                ; skip next inst if PD2 is high
+  RCALL  Led_On                   ; if PD2 is low; BTN pressed
+  SBIC   PIND, PD2                ; skip next inst if PD2 is low
+  RCALL  Led_Off                  ; if PD2 is high; BTN not pressed
+  RET                             ; return from subroutine
 
 ; ===================================================================
-; SUBROUTINE: led_on
+; SUBROUTINE: Led_On
 ; ===================================================================
 ; Description: Sets PB5 high to turn on the LED.
 ; -------------------------------------------------------------------
@@ -89,12 +89,12 @@ check_button:
 ;               6.95 SBI – Set Bit in I/O Register
 ;               6.88 RET – Return from Subroutine
 ; ===================================================================
-led_on:
-  sbi    PORTD, PD4               ; set PD4 high
-  ret                             ; return from subroutine
+Led_On:
+  SBI    PORTD, PD4               ; set PD4 high
+  RET                             ; return from subroutine
 
 ; ===================================================================
-; SUBROUTINE: led_off
+; SUBROUTINE: Led_Off
 ; ===================================================================
 ; Description: Clears PB5 to turn off the LED.
 ; -------------------------------------------------------------------
@@ -102,6 +102,6 @@ led_on:
 ;               6.33 CBI – Clear Bit in I/O Register
 ;               6.88 RET – Return from Subroutine
 ; ===================================================================
-led_off:
-  cbi    PORTD, PD4               ; set PD4 low
-  ret                             ; return from subroutine
+Led_Off:
+  CBI    PORTD, PD4               ; set PD4 low
+  RET                             ; return from subroutine
