@@ -88,13 +88,13 @@ Config_Pins:
 ; ===================================================================
 Check_Button:
   SBIS   PIND, PD2                ; skip next inst if PD2 is high
-  RCALL  Led_On                   ; if PD2 is low; BTN pressed
+  RCALL  LED_On                   ; if PD2 is low; BTN pressed
   SBIC   PIND, PD2                ; skip next inst if PD2 is low
-  RCALL  Led_Off                  ; if PD2 is high; BTN not pressed
+  RCALL  LED_Off                  ; if PD2 is high; BTN not pressed
   RET                             ; return from subroutine
 
 ; ===================================================================
-; SUBROUTINE: Led_On
+; SUBROUTINE: LED_On
 ; ===================================================================
 ; Description: Sets PB5 high to turn on the LED.
 ; -------------------------------------------------------------------
@@ -107,7 +107,7 @@ Led_On:
   RET                             ; return from subroutine
 
 ; ===================================================================
-; SUBROUTINE: Led_Off
+; SUBROUTINE: LED_Off
 ; ===================================================================
 ; Description: Clears PB5 to turn off the LED.
 ; -------------------------------------------------------------------
